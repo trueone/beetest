@@ -9,6 +9,7 @@ import (
 type Create interface {
 	validate(*entity.Secret) error
 	hash(*entity.Secret) error
+	save(*entity.Secret) error
 
 	Execute(*entity.Secret) error
 }
@@ -33,6 +34,10 @@ func (c *create) validate(secret *entity.Secret) error {
 
 // get hash from text
 func (c *create) hash(secret *entity.Secret) error {
+	return nil
+}
+
+func (c *create) save(secret *entity.Secret) error {
 	return nil
 }
 
