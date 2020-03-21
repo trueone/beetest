@@ -5,6 +5,6 @@ import (
 )
 
 type Repository interface {
-	Save(*entity.Secret) error
+	Create(*entity.Secret) error
 	Get(secret *entity.Secret) error
 }
