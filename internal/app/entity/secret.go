@@ -17,7 +17,6 @@ func (s *Secret) IsExceedLimit() bool {
 	return s.ViewsCount > s.RemainingViews
 }
 
-func (s *Secret) IsExpired() bool {
-	// TODO: Дописать проверку времени
-	return false
+func (s *Secret) IsExpired(now time.Time) bool {
+	return now.Before(s.Expires)
 }

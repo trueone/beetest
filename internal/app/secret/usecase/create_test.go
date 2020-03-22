@@ -10,10 +10,6 @@ import (
 	"github.com/trueone/beetest/internal/app/secret/usecase"
 )
 
-var (
-	repo = repository.NewRepositoryMap()
-)
-
 func TestCreate_Execute(t *testing.T) {
 	cases := []struct {
 		name  string
@@ -58,6 +54,7 @@ func TestCreate_Execute(t *testing.T) {
 		},
 	}
 
+	repo := repository.NewRepositoryMap()
 	create := usecase.NewCreate(repo)
 	for _, c := range cases {
 		_, err := create.Execute(c.data)

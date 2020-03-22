@@ -6,3 +6,6 @@ type SecretRequest struct {
 	ExpireAfterViews int    `json:"expireAfterViews"`
 	ExpireAfter      int    `json:"expireAfter"`
 }
+
+// Hash data transfer object
+type HashRequest string
