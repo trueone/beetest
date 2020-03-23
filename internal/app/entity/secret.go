@@ -8,7 +8,7 @@ type Secret struct {
 	Hash           string
 	Text           string
 	Created        time.Time
-	Expires        time.Time
+	ExpireAfter    int
 	RemainingViews int
 	ViewsCount     int
 }
@@ -18,5 +18,10 @@ func (s *Secret) IsExceedLimit() bool {
 }
 
 func (s *Secret) IsExpired(now time.Time) bool {
-	return now.After(s.Expires)
+	if s.ExpireAfter == 0 {
+		return false
+	}
+
+	expire := s.Created.Add(time.Minute * time.Duration(s.ExpireAfter))
+	return now.After(expire)
 }

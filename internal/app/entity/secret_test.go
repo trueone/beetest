@@ -28,9 +28,10 @@ func TestSecret_IsExpired(t *testing.T) {
 	now := time.Now()
 
 	secret := entity.Secret{
-		Expires: now,
+		Created:     now,
+		ExpireAfter: 1,
 	}
 
-	assert.Equal(t, true, secret.IsExpired(now.Add(1*time.Second)))
-	assert.Equal(t, false, secret.IsExpired(now.Add(-1*time.Second)))
+	assert.Equal(t, true, secret.IsExpired(now.Add(2*time.Minute)))
+	assert.Equal(t, false, secret.IsExpired(now))
 }

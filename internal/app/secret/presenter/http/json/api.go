@@ -29,10 +29,6 @@ func (h *Handler) Create(c echo.Context) error {
 		return c.JSON(http.StatusMethodNotAllowed, "Invalid input")
 	}
 
-	if err := c.Validate(request); err != nil {
-		return c.JSON(http.StatusMethodNotAllowed, "Invalid input")
-	}
-
 	s, err := h.registry.Create().Execute(*request)
 	if err != nil {
 		return c.JSON(http.StatusMethodNotAllowed, "Invalid input")

@@ -55,7 +55,7 @@ func (c *create) construct(request data.SecretRequest) entity.Secret {
 		Hash:           hex.EncodeToString(hash[:]),
 		Text:           request.Secret,
 		Created:        now,
-		Expires:        now.Add(time.Minute * time.Duration(request.ExpireAfter)),
+		ExpireAfter:    request.ExpireAfter,
 		RemainingViews: request.ExpireAfterViews,
 	}
 }

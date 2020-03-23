@@ -20,6 +20,8 @@ func (sr *SecretResponse) Deserialize(secret entity.Secret) {
 	sr.Hash = secret.Hash
 	sr.SecretText = secret.Text
 	sr.CreatedAt = secret.Created
-	sr.ExpiresAt = secret.Expires
+	if secret.ExpireAfter != 0 {
+		sr.ExpiresAt = secret.Created.Add(time.Minute * time.Duration(secret.ExpireAfter))
+	}
 	sr.RemainingViews = secret.RemainingViews
 }

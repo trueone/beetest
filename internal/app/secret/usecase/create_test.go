@@ -47,8 +47,8 @@ func TestCreate_Execute(t *testing.T) {
 			name:  "Create zero view secret",
 			valid: false,
 			data: data.SecretRequest{
-				Secret:           "",
-				ExpireAfterViews: 1,
+				Secret:           "secret",
+				ExpireAfterViews: 0,
 				ExpireAfter:      0,
 			},
 		},
