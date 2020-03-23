@@ -5,17 +5,17 @@ import (
 	"time"
 
 	"github.com/trueone/beetest/internal/app/entity"
-	"github.com/trueone/beetest/internal/app/secret/dto"
+	"github.com/trueone/beetest/internal/app/secret/data"
 	"github.com/trueone/beetest/internal/app/secret/repository"
 )
 
 // Get scenario
 type Get interface {
-	find(hash dto.HashRequest) (entity.Secret, error)
-	update(*entity.Secret) error
-	validate(*entity.Secret) error
+	find(hash data.HashRequest) (entity.Secret, error)
+	update(secret *entity.Secret) error
+	validate(secret *entity.Secret) error
 
-	Execute(hash dto.HashRequest) (entity.Secret, error)
+	Execute(hash data.HashRequest) (entity.Secret, error)
 }
 
 // Get inter actor
@@ -32,7 +32,7 @@ func NewGet(sr repository.Repository) Get {
 }
 
 // Find secret
-func (g *get) find(hash dto.HashRequest) (secret entity.Secret, err error) {
+func (g *get) find(hash data.HashRequest) (secret entity.Secret, err error) {
 	secret.Hash = string(hash)
 	err = g.repository.Get(&secret)
 
@@ -62,7 +62,7 @@ func (g *get) validate(secret *entity.Secret) (err error) {
 }
 
 // Execute entry point
-func (g *get) Execute(hash dto.HashRequest) (secret entity.Secret, err error) {
+func (g *get) Execute(hash data.HashRequest) (secret entity.Secret, err error) {
 	secret, err = g.find(hash)
 	if err != nil {
 		return

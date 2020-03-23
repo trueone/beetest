@@ -31,6 +31,6 @@ func TestSecret_IsExpired(t *testing.T) {
 		Expires: now,
 	}
 
-	assert.Equal(t, false, secret.IsExpired(now.Add(1*time.Second)))
-	assert.Equal(t, true, secret.IsExpired(now.Add(-1*time.Second)))
+	assert.Equal(t, true, secret.IsExpired(now.Add(1*time.Second)))
+	assert.Equal(t, false, secret.IsExpired(now.Add(-1*time.Second)))
 }

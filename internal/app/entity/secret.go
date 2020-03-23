@@ -18,5 +18,5 @@ func (s *Secret) IsExceedLimit() bool {
 }
 
 func (s *Secret) IsExpired(now time.Time) bool {
-	return now.Before(s.Expires)
+	return now.After(s.Expires)
 }

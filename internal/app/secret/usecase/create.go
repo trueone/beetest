@@ -7,17 +7,17 @@ import (
 	"time"
 
 	"github.com/trueone/beetest/internal/app/entity"
-	"github.com/trueone/beetest/internal/app/secret/dto"
+	"github.com/trueone/beetest/internal/app/secret/data"
 	"github.com/trueone/beetest/internal/app/secret/repository"
 )
 
 // Create scenario
 type Create interface {
-	validate(request dto.SecretRequest) error
-	construct(request dto.SecretRequest) entity.Secret
+	validate(request data.SecretRequest) error
+	construct(request data.SecretRequest) entity.Secret
 	save(secret *entity.Secret) error
 
-	Execute(request dto.SecretRequest) (entity.Secret, error)
+	Execute(request data.SecretRequest) (entity.Secret, error)
 }
 
 // Create inter actor
@@ -34,7 +34,7 @@ func NewCreate(sr repository.Repository) Create {
 }
 
 // Validate fields
-func (c *create) validate(request dto.SecretRequest) error {
+func (c *create) validate(request data.SecretRequest) error {
 	if request.Secret == "" {
 		return errors.New("secret text is required")
 	}
@@ -47,7 +47,7 @@ func (c *create) validate(request dto.SecretRequest) error {
 }
 
 // Create Secret object
-func (c *create) construct(request dto.SecretRequest) entity.Secret {
+func (c *create) construct(request data.SecretRequest) entity.Secret {
 	hash := md5.Sum([]byte(request.Secret))
 	now := time.Now()
 
@@ -66,7 +66,7 @@ func (c *create) save(secret *entity.Secret) error {
 }
 
 // Execute entry point
-func (c *create) Execute(request dto.SecretRequest) (secret entity.Secret, err error) {
+func (c *create) Execute(request data.SecretRequest) (secret entity.Secret, err error) {
 	if err = c.validate(request); err != nil {
 		return
 	}

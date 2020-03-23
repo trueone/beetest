@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/trueone/beetest/internal/app/entity"
-	"github.com/trueone/beetest/internal/app/secret/dto"
+	"github.com/trueone/beetest/internal/app/secret/data"
 	"github.com/trueone/beetest/internal/app/secret/repository"
 	"github.com/trueone/beetest/internal/app/secret/usecase"
 )
@@ -19,12 +19,12 @@ func TestGet_Execute(t *testing.T) {
 
 	get := usecase.NewGet(repo)
 
-	s, err := get.Execute(dto.HashRequest("secret"))
+	s, err := get.Execute(data.HashRequest("secret"))
 	assert.NoError(t, err, "Get secret")
 
 	secret.ViewsCount++
 	assert.Equal(t, secret, s, "Compare secret")
 
-	_, err = get.Execute(dto.HashRequest("secret"))
+	_, err = get.Execute(data.HashRequest("secret"))
 	assert.Error(t, err, "Get limit exceeded")
 }

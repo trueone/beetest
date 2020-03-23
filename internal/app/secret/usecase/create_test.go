@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/trueone/beetest/internal/app/secret/dto"
+	"github.com/trueone/beetest/internal/app/secret/data"
 	"github.com/trueone/beetest/internal/app/secret/repository"
 	"github.com/trueone/beetest/internal/app/secret/usecase"
 )
@@ -14,12 +14,12 @@ func TestCreate_Execute(t *testing.T) {
 	cases := []struct {
 		name  string
 		valid bool
-		data  dto.SecretRequest
+		data  data.SecretRequest
 	}{
 		{
 			name:  "Create secret",
 			valid: true,
-			data: dto.SecretRequest{
+			data: data.SecretRequest{
 				Secret:           "secret",
 				ExpireAfterViews: 1,
 				ExpireAfter:      0,
@@ -28,7 +28,7 @@ func TestCreate_Execute(t *testing.T) {
 		{
 			name:  "Create existing secret",
 			valid: false,
-			data: dto.SecretRequest{
+			data: data.SecretRequest{
 				Secret:           "secret",
 				ExpireAfterViews: 1,
 				ExpireAfter:      0,
@@ -37,7 +37,7 @@ func TestCreate_Execute(t *testing.T) {
 		{
 			name:  "Create empty secret",
 			valid: false,
-			data: dto.SecretRequest{
+			data: data.SecretRequest{
 				Secret:           "",
 				ExpireAfterViews: 1,
 				ExpireAfter:      0,
@@ -46,7 +46,7 @@ func TestCreate_Execute(t *testing.T) {
 		{
 			name:  "Create zero view secret",
 			valid: false,
-			data: dto.SecretRequest{
+			data: data.SecretRequest{
 				Secret:           "",
 				ExpireAfterViews: 1,
 				ExpireAfter:      0,
