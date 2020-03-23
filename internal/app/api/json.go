@@ -1,4 +1,4 @@
-package json
+package api
 
 import (
 	"github.com/go-playground/validator"
@@ -15,7 +15,7 @@ func (cv *CustomValidator) Validate(i interface{}) error {
 	return cv.validator.Struct(i)
 }
 
-func Start() {
+func JsonStart() {
 	e := echo.New()
 	e.Validator = &CustomValidator{validator: validator.New()}
 

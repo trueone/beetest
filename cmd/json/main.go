@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	"github.com/trueone/beetest/internal/app/api/json"
+	"github.com/trueone/beetest/internal/app/api"
 )
 
 func main() {
 	fmt.Println("Starting json api...")
-	json.Start()
+	api.JsonStart()
 }
