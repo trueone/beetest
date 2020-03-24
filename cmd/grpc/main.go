@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	fmt.Println("Starting json api...")
-	api.JSONStart()
+	fmt.Println("Starting grpc...")
+	api.GRPCStart()
 }

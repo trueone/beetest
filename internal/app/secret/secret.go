@@ -2,9 +2,11 @@ package secret
 
 import (
 	"github.com/labstack/echo"
+	"google.golang.org/grpc"
 
 	"github.com/trueone/beetest/internal/app/secret/presenter"
-	"github.com/trueone/beetest/internal/app/secret/presenter/http/json"
+	grpchandler "github.com/trueone/beetest/internal/app/secret/presenter/http/grpc"
+	jsonhandler "github.com/trueone/beetest/internal/app/secret/presenter/http/json"
 	"github.com/trueone/beetest/internal/app/secret/repository"
 	"github.com/trueone/beetest/internal/app/secret/usecase"
 )
@@ -23,8 +25,13 @@ func New() presenter.Registry {
 }
 
 // Register json handlers
-func (r *registry) RegisterJsonHandlers(e *echo.Echo) {
-	json.Register(e, json.New(r))
+func (r *registry) RegisterJSONHandlers(e *echo.Echo) {
+	jsonhandler.Register(e, jsonhandler.New(r))
+}
+
+// Register grpc handlers
+func (r *registry) RegisterGRPCHandlers(s *grpc.Server) {
+	grpchandler.Register(s, grpchandler.New(r))
 }
 
 // Create usecase getter
