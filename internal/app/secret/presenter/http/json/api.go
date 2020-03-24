@@ -13,11 +13,13 @@ type Handler struct {
 	registry presenter.Registry
 }
 
-func NewHandler(e *echo.Echo, registry presenter.Registry) {
-	h := &Handler{
+func New(registry presenter.Registry) *Handler {
+	return &Handler{
 		registry: registry,
 	}
+}
 
+func Register(e *echo.Echo, h *Handler) {
 	e.POST("/v1/secret", h.Create)
 	e.GET("/v1/secret/:hash", h.Get)
 }

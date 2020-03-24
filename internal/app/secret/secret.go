@@ -24,7 +24,7 @@ func New() presenter.Registry {
 
 // Register json handlers
 func (r *registry) RegisterJsonHandlers(e *echo.Echo) {
-	json.NewHandler(e, r)
+	json.Register(e, json.New(r))
 }
 
 // Create usecase getter
