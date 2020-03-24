@@ -20,7 +20,7 @@ func JSONStart() {
 }
 
 func GRPCStart() {
-	lis, err := net.Listen("tcp", "127.0.0.1:8081")
+	lis, err := net.Listen("tcp", ":8081")
 	if err != nil {
 		log.Fatal(err)
 	}
